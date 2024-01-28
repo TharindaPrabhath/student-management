@@ -17,43 +17,37 @@ type Props = {
   onSubmit: () => void;
 };
 
-export function CreateStudentModal({ open, onSubmit, onClose }: Props) {
+export function CreateClassModal({ open, onSubmit, onClose }: Props) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add New Students</DialogTitle>
+          <DialogTitle>Add New Classes</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              First Name
+            <Label htmlFor="clcode" className="text-right">
+              Class Code
             </Label>
-            <Input id="firstName" className="col-span-3" />
+            <Input id="classcode" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Last Name
+            <Label htmlFor="clname" className="text-right">
+              Class Name
             </Label>
-            <Input id="lastName" className="col-span-3" />
+            <Input id="classname" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Birthday
+            <Label htmlFor="tname" className="text-right">
+              Teacher
             </Label>
-            <Input id="birthday" className="col-span-3" />
+            <Input id="teachern" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Phone
+            <Label htmlFor="Lhall" className="text-right">
+              Lecture Hall
             </Label>
-            <Input id="phone" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Address
-            </Label>
-            <Input id="address" className="col-span-3" />
+            <Input id="lechall" className="col-span-3" />
           </div>
         </div>
         <DialogFooter>
