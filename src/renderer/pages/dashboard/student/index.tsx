@@ -47,8 +47,11 @@ function Student() {
 
   return (
     <div className="container">
-      <div className="flex flex-row items-center justify-between py-2">
-        <Sidebar />
+      <div className="flex flex-row items-center justify-between py-10">
+        <div className="flex flex-row justify-left space-x-5 text-3xl text-black">
+          <Sidebar />
+          <h1>Student</h1>
+        </div>
         <Button onClick={() => setOpen(true)}>New</Button>
       </div>
 
