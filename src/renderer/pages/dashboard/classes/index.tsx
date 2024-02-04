@@ -4,45 +4,37 @@ import { DataTable } from '@/components/ui/data-table';
 
 import { Menu } from 'lucide-react';
 import { columns } from './columns';
-import { CreateStudentModal } from './create-student-modal';
+import { CreateClassModal } from './create-class-modal';
 import { useState } from 'react';
 
 const data = [
   {
-    id: '1',
-    firstName: 'Nguyen',
-    lastName: 'Van A',
-    birthday: '01/01/1990',
-    phone: '0123456789',
-    address: 'Hanoi',
+    classcode: 'ce01',
+    className: 'civil',
+    teacher: 'abc',
+    lecturehall: 'LT01',
   },
   {
-    id: '2',
-    firstName: 'aaa',
-    lastName: 'Van A',
-    birthday: '01/01/1990',
-    phone: '0123456789',
-    address: 'Hanoi',
+    classcode: 'ce02',
+    className: 'chem',
+    teacher: 'abc1',
+    lecturehall: 'LT02',
   },
   {
-    id: '3',
-    firstName: 'cc',
-    lastName: 'Van A',
-    birthday: '01/01/1990',
-    phone: '0123456789',
-    address: 'Hanoi',
+    classcode: 'ce03',
+    className: 'math',
+    teacher: 'abc2',
+    lecturehall: 'LT03',
   },
   {
-    id: '4',
-    firstName: 'Ngttbuyen',
-    lastName: 'Van A',
-    birthday: '01/01/1990',
-    phone: '0123456789',
-    address: 'Hanoi',
+    classcode: 'ce04',
+    className: 'sci',
+    teacher: 'abc3',
+    lecturehall: 'LT04',
   },
 ];
 
-function Student() {
+function Class() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -50,14 +42,14 @@ function Student() {
       <div className="flex flex-row items-center justify-between py-10">
         <div className="flex flex-row justify-left space-x-5 text-3xl text-black">
           <Sidebar />
-          <h1>Student</h1>
+          <h1>Class</h1>
         </div>
         <Button onClick={() => setOpen(true)}>New</Button>
       </div>
 
-      <DataTable data={data} columns={columns} searchKey="id" />
+      <DataTable data={data} columns={columns} searchKey="classcode" />
 
-      <CreateStudentModal
+      <CreateClassModal
         open={open}
         onSubmit={() => {
           //
@@ -68,4 +60,4 @@ function Student() {
   );
 }
 
-export default Student;
+export default Class;

@@ -4,7 +4,7 @@ import { DataTable } from '@/components/ui/data-table';
 
 import { Menu } from 'lucide-react';
 import { columns } from './columns';
-import { CreateStudentModal } from './create-student-modal';
+import { CreateTeacherModal } from './create-teacher-modal';
 import { useState } from 'react';
 
 const data = [
@@ -42,7 +42,7 @@ const data = [
   },
 ];
 
-function Student() {
+function Teacher() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -50,14 +50,14 @@ function Student() {
       <div className="flex flex-row items-center justify-between py-10">
         <div className="flex flex-row justify-left space-x-5 text-3xl text-black">
           <Sidebar />
-          <h1>Student</h1>
+          <h1>Teacher</h1>
         </div>
         <Button onClick={() => setOpen(true)}>New</Button>
       </div>
 
       <DataTable data={data} columns={columns} searchKey="id" />
 
-      <CreateStudentModal
+      <CreateTeacherModal
         open={open}
         onSubmit={() => {
           //
@@ -68,4 +68,4 @@ function Student() {
   );
 }
 
-export default Student;
+export default Teacher;

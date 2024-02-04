@@ -18,17 +18,17 @@ function Sidebar() {
           <Menu className="w-6 h-6" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left">
+      <SheetContent side="left" className="bg-black-100">
         <SheetHeader>
-          <SheetTitle>Navigation Menu</SheetTitle>
+          <SheetTitle className="text-white">Navigation Menu</SheetTitle>
         </SheetHeader>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col text-white">
           {Tabs.map((tab) => (
             <Link
               key={tab.label}
               to={tab.path}
-              className="py-4 px-4 text-lg font-semibold hover:bg-slate-100"
+              className="py-4 px-4 text-lg font-semibold hover:bg-slate-600 "
             >
               {tab.label}
             </Link>
