@@ -1,4 +1,5 @@
 import { ColumnDef } from '@tanstack/react-table';
+import { DataTableRowActions } from './data-table-row-actions';
 
 type Teacher = {
   id: string;
@@ -49,6 +50,11 @@ export const columns: ColumnDef<Teacher>[] = [
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue('address')}</div>
     ),
+  },
+  {
+    id: 'actions',
+    enableHiding: false,
+    cell: ({ row }) => <DataTableRowActions row={row} />,
   },
   // {
   //   id: "actions",

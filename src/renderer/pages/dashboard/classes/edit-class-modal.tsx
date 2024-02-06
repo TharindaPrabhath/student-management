@@ -10,38 +10,36 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Props = {
+  id: number;
   open: boolean;
   onClose: () => void;
   onSubmit: (data: any) => void;
 };
 
-export function CreateClassModal({ open, onSubmit, onClose }: Props) {
-  const [code, setCode] = useState('');
+export function EditClassModal({ id, open, onSubmit, onClose }: Props) {
   const [name, setName] = useState('');
   const [lectureHall, setLectureHall] = useState('');
-  const [teacherId, setTeacherId] = useState('');
+
+  useEffect(() => {
+    const fetchClass = async () => {
+      const res = await fetch(`http://localhost:5000/api/classes/${id}`);
+      const data = await res.json();
+      setName(data?.name);
+      setLectureHall(data?.lectureHall);
+    };
+    fetchClass();
+  }, [id]);
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add New Classes</DialogTitle>
+          <DialogTitle>Edit Class</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="clcode" className="text-right">
-              Class Code
-            </Label>
-            <Input
-              id="classcode"
-              className="col-span-3"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-            />
-          </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="clname" className="text-right">
               Class Name
@@ -51,17 +49,6 @@ export function CreateClassModal({ open, onSubmit, onClose }: Props) {
               className="col-span-3"
               value={name}
               onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="tname" className="text-right">
-              Teacher
-            </Label>
-            <Input
-              id="teachern"
-              className="col-span-3"
-              value={teacherId}
-              onChange={(e) => setTeacherId(e.target.value)}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -83,10 +70,10 @@ export function CreateClassModal({ open, onSubmit, onClose }: Props) {
           <Button
             type="submit"
             onClick={() => {
-              onSubmit({ code, name, lectureHall, teacherId });
+              onSubmit({ name, lectureHall });
             }}
           >
-            Create
+            Edit
           </Button>
         </DialogFooter>
       </DialogContent>

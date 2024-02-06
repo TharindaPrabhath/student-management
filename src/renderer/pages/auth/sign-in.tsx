@@ -11,8 +11,28 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const ADMIN_EMAIL = 'sample@email.com';
+const ADMIN_PASSWORD = 'qwerty';
 
 export function SignIn() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const signIn = async () => {
+    try {
+      if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+        navigate('/students');
+      } else {
+        alert('Invalid email or password');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <div className="h-screen flex justify-center items-center">
       <Card>
@@ -30,15 +50,27 @@ export function SignIn() {
           </div>
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="m@example.com" />
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" />
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full">Sign In</Button>
+          <Button className="w-full" onClick={signIn}>
+            Sign In
+          </Button>
         </CardFooter>
       </Card>
     </div>

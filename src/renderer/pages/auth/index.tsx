@@ -1,11 +1,10 @@
 import Sidebar from '@/components/sidebar';
 import { Button } from '@/components/ui/button';
 import { DataTable } from '@/components/ui/data-table';
-
-import { columns } from './columns';
-import { CreateClassModal } from './create-class-modal';
+import { CreateUserModal } from './create-user-modal';
 import { useEffect, useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
+import { columns } from './columns';
 
 const data = [
   {
@@ -34,27 +33,27 @@ const data = [
   },
 ];
 
-function Class() {
+function User() {
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
-  const [classes, setClasses] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const fetchClasses = async () => {
+    const fetchUsers = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/classes');
+        const res = await fetch('http://localhost:5000/api/users');
         const data = await res.json();
-        setClasses(data);
+        setUsers(data);
       } catch (err) {
         console.error(err);
       }
     };
-    fetchClasses();
+    fetchUsers();
   }, []);
 
-  const createClass = async (data: any) => {
+  const createUser = async (data: any) => {
     try {
-      await fetch('http://localhost:5000/api/classes', {
+      await fetch('http://localhost:5000/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,10 +61,10 @@ function Class() {
         body: JSON.stringify(data),
       });
       setOpen(false);
-      toast({ title: 'Success', description: 'Class created successfully' });
+      toast({ title: 'Success', description: 'User created successfully' });
     } catch (err) {
       console.error(err);
-      toast({ title: 'Error', description: 'Failed to create class' });
+      toast({ title: 'Error', description: 'Failed to create user' });
     }
   };
 
@@ -74,20 +73,20 @@ function Class() {
       <div className="flex flex-row items-center justify-between py-10">
         <div className="flex flex-row justify-left space-x-5 text-3xl text-black">
           <Sidebar />
-          <h1>Class</h1>
+          <h1>User</h1>
         </div>
         <Button onClick={() => setOpen(true)}>New</Button>
       </div>
 
-      <DataTable data={classes} columns={columns} searchKey="classcode" />
+      <DataTable data={users} columns={columns} searchKey="classcode" />
 
-      <CreateClassModal
+      <CreateUserModal
         open={open}
-        onSubmit={createClass}
+        onSubmit={createUser}
         onClose={() => setOpen(false)}
       />
     </div>
   );
 }
 
-export default Class;
+export default User;

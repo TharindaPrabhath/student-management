@@ -10,28 +10,41 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Props = {
+  id: number;
   open: boolean;
   onClose: () => void;
   onSubmit: (data: any) => void;
 };
 
-export function CreateStudentModal({ open, onSubmit, onClose }: Props) {
+export function EditStudentModal({ id, open, onSubmit, onClose }: Props) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [birthday, setBirthday] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [teacherId, setTeacherId] = useState('');
-  const [classId, setClassId] = useState('');
+
+  useEffect(() => {
+    const fetchStudent = async () => {
+      const res = await fetch(`http://localhost:5000/api/students/${id}`);
+      const data = await res.json();
+      console.log(data);
+      setFirstName(data?.firstName);
+      setLastName(data?.lastName);
+      setBirthday(data?.birthday);
+      setPhone(data?.phone);
+      setAddress(data?.address);
+    };
+    fetchStudent();
+  }, [id]);
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add New Students</DialogTitle>
+          <DialogTitle>Edit Student</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
@@ -89,28 +102,6 @@ export function CreateStudentModal({ open, onSubmit, onClose }: Props) {
               onChange={(e) => setAddress(e.target.value)}
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Teacher
-            </Label>
-            <Input
-              id="address"
-              className="col-span-3"
-              value={teacherId}
-              onChange={(e) => setTeacherId(e.target.value)}
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Class
-            </Label>
-            <Input
-              id="address"
-              className="col-span-3"
-              value={classId}
-              onChange={(e) => setClassId(e.target.value)}
-            />
-          </div>
         </div>
 
         <DialogFooter>
@@ -126,12 +117,10 @@ export function CreateStudentModal({ open, onSubmit, onClose }: Props) {
                 birthday,
                 phone,
                 address,
-                teacherId,
-                classId,
               })
             }
           >
-            Create
+            Edit
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -1,40 +1,42 @@
 import { ColumnDef } from '@tanstack/react-table';
+import { DataTableRowActions } from './data-table-row-actions';
 
 type Class = {
-  classcode: string;
-  className: string;
-  teacher: string;
-  lecturehall: string;
+  code: string;
+  name: string;
+  teacherId: string;
+  lectureHall: string;
 };
 
 export const columns: ColumnDef<Class>[] = [
+  // {
+  //   accessorKey: 'code',
+  //   header: 'Class Code',
+  //   cell: ({ row }) => <div className="capitalize">{row.getValue('code')}</div>,
+  // },
   {
-    accessorKey: 'classcode',
-    header: 'Class Code',
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue('classcode')}</div>
-    ),
-  },
-  {
-    accessorKey: 'className',
+    accessorKey: 'name',
     header: 'Class Name',
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue('className')}</div>
-    ),
+    cell: ({ row }) => <div className="capitalize">{row.getValue('name')}</div>,
   },
   {
-    accessorKey: 'teacher',
+    accessorKey: 'teacherId',
     header: 'Teacher',
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue('teacher')}</div>
+      <div className="capitalize">{row.getValue('teacherId')}</div>
     ),
   },
   {
-    accessorKey: 'lecturehall',
+    accessorKey: 'lectureHall',
     header: 'Lecture Hall',
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue('lecturehall')}</div>
+      <div className="capitalize">{row.getValue('lectureHall')}</div>
     ),
+  },
+  {
+    id: 'actions',
+    enableHiding: false,
+    cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 
   // {

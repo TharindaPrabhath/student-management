@@ -2,10 +2,10 @@ import Sidebar from '@/components/sidebar';
 import { Button } from '@/components/ui/button';
 import { DataTable } from '@/components/ui/data-table';
 
-import { Menu } from 'lucide-react';
 import { columns } from './columns';
 import { CreateStudentModal } from './create-student-modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
 
 const data = [
   {
@@ -43,7 +43,44 @@ const data = [
 ];
 
 function Student() {
+  const { toast } = useToast();
   const [open, setOpen] = useState(false);
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const res = await fetch('http://localhost:5000/api/students');
+        const data = await res.json();
+        setStudents(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchStudents();
+  }, []);
+
+  const createStudent = async (data: any) => {
+    try {
+      await fetch('http://localhost:5000/api/students', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      setOpen(false);
+      toast({ title: 'Success', description: 'Student created successfully.' });
+      // redirect('/students');
+      window.location.href = '/students';
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: 'Error',
+        description: 'Failed to create student. Please try again.',
+      });
+    }
+  };
 
   return (
     <div className="container">
@@ -55,13 +92,11 @@ function Student() {
         <Button onClick={() => setOpen(true)}>New</Button>
       </div>
 
-      <DataTable data={data} columns={columns} searchKey="id" />
+      <DataTable data={students} columns={columns} searchKey="id" />
 
       <CreateStudentModal
         open={open}
-        onSubmit={() => {
-          //
-        }}
+        onSubmit={createStudent}
         onClose={() => setOpen(false)}
       />
     </div>
