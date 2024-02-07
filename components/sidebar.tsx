@@ -7,15 +7,16 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Button } from './ui/button';
-import { Menu } from 'lucide-react';
+import { GraduationCapIcon, Menu } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { GraduationCap } from 'lucide-react';
 
 function Sidebar() {
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="outline" size="icon">
-          <Menu className="w-6 h-6" />
+          <Menu className="w-6 h-6 " />
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="bg-black-100">
@@ -28,7 +29,7 @@ function Sidebar() {
             <Link
               key={tab.label}
               to={tab.path}
-              className="py-4 px-4 text-lg font-semibold hover:bg-slate-600 "
+              className="py-4 px-4 text-lg font-semibold hover:bg-slate-800 hover:border-l-4 "
             >
               {tab.label}
             </Link>
