@@ -105,6 +105,7 @@ export function CreateTeacherModal({ open, onSubmit, onClose }: Props) {
             Cancel
           </Button>
           <Button
+            className="bg-sky-600"
             type="submit"
             onClick={() => {
               onSubmit({

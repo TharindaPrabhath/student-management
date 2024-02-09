@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 
 type Props = {
   open: boolean;
@@ -81,6 +81,7 @@ export function CreateClassModal({ open, onSubmit, onClose }: Props) {
             Cancel
           </Button>
           <Button
+            className="bg-sky-600"
             type="submit"
             onClick={() => {
               onSubmit({ code, name, lectureHall, teacherId });
