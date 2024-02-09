@@ -5,7 +5,7 @@ import { Row } from '@tanstack/react-table';
 // Components
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import { EditStudentModal } from './edit-student-modal';
 import { Trash } from 'lucide-react';
 import { PencilLine } from 'lucide-react';
@@ -19,6 +19,7 @@ export function DataTableRowActions<TData>({
 }: DataTableRowActionsProps<any>) {
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
+  const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
   const editStudent = async (data: any) => {
     try {
@@ -34,12 +35,12 @@ export function DataTableRowActions<TData>({
         description: 'Student has been edited successfully',
       });
       setOpen(false);
-      // redirect('/students');
-      // window.location.reload();
+      forceUpdate();
     } catch (err) {
       console.error(err);
       toast({ title: 'Error', description: 'Something went wrong.' });
     }
+    [reducerValue];
   };
 
   const deleteStudent = async () => {
@@ -51,12 +52,12 @@ export function DataTableRowActions<TData>({
         title: 'Student Deleted',
         description: 'Student has been deleted successfully',
       });
-      // redirect('/students');
-      window.location.reload();
+      forceUpdate();
     } catch (err) {
       console.error(err);
       toast({ title: 'Error', description: 'Something went wrong.' });
     }
+    [reducerValue];
   };
 
   return (

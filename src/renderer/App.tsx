@@ -11,37 +11,22 @@ import Class from './pages/dashboard/classes';
 
 function Hello() {
   return (
-    <div
-      style={{
-        backgroundColor: 'black',
-        color: 'white',
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <p className="text-7xl font-black py-10 text-center">
-        Student Registration System
-      </p>
-      <div className="flex flex-row">
+    <div className="flex">
+      <div className="leftside w-3/4">
+        <div className="bg"></div>
+      </div>
+
+      <div className="rightside w-1/4 p-10 flex flex-col justify-center">
+        <h1 className="text-6xl py-10 text-center text-sky-800 font-bold">
+          Student Registration System
+        </h1>
+
         <Link to="/auth/sign-in">
-          <Button
-            className="w-full"
-            style={{ backgroundColor: 'white', color: 'black' }}
-          >
-            Get Started
-          </Button>
+          <Button className="w-full mb-5 bg-sky-600">Get Started</Button>
         </Link>
-        <div className="px-10"></div>
+
         <Link to="/students">
-          <Button
-            className="w-full"
-            style={{ backgroundColor: 'white', color: 'black' }}
-          >
-            Students
-          </Button>
+          <Button className="w-full bg-sky-600">Students</Button>
         </Link>
       </div>
     </div>

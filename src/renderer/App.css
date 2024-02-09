@@ -7,7 +7,18 @@ body,
 :root {
   height: 100%;
 }
-
+.leftside {
+  min-height: 100vh;
+  width: 75%;
+}
+img {
+  max-width: 75%;
+}
+.bg {
+  background-image: url('img/landing_img2.jpg');
+  background-size: cover;
+  height: 100%;
+}
 @layer base {
   :root {
     --background: 0 0% 100%;

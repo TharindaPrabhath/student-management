@@ -1,10 +1,9 @@
 import Sidebar from '@/components/sidebar';
 import { Button } from '@/components/ui/button';
 import { DataTable } from '@/components/ui/data-table';
-import { CreateUserModal } from './create-user-modal';
+
 import { useEffect, useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
-import { columns } from './columns';
 
 const data = [
   {

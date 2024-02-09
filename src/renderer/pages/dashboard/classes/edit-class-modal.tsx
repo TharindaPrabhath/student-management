@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useReducer } from 'react';
 
 type Props = {
   id: number;
@@ -27,6 +27,7 @@ export function EditClassModal({ id, open, onSubmit, onClose }: Props) {
     const fetchClass = async () => {
       const res = await fetch(`http://localhost:5000/api/classes/${id}`);
       const data = await res.json();
+
       setName(data?.name);
       setLectureHall(data?.lectureHall);
     };
@@ -68,6 +69,7 @@ export function EditClassModal({ id, open, onSubmit, onClose }: Props) {
             Cancel
           </Button>
           <Button
+            className="bg-sky-600"
             type="submit"
             onClick={() => {
               onSubmit({ name, lectureHall });
